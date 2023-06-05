@@ -13,9 +13,9 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const routes_article = require("./routes/summary");
+const routes = require("./routes/summary");
 
-app.use("/api", routes_article);
+app.use("/api", routes);
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

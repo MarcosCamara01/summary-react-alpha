@@ -13,7 +13,6 @@ const create = (req, res) => {
             });
         }
 
-        // Save result
         return res.status(200).json({
             status: "success",
             article: savedArticle,

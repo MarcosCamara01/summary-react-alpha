@@ -1,9 +1,10 @@
 const express = require("express");
-const SummaryController = require("../controllers/summary");
-
 const router = express.Router();
 
-// Ruta util
+const SummaryController = require("../controllers/summary");
+const openaiHandler = require('../controllers/getSummary');
+
+router.post("/summary", openaiHandler);
 router.post("/crear", SummaryController.create);
 router.get("/articulos/:ultimos?", SummaryController.list);
 router.delete("/articulo/:id", SummaryController.deleteOne);
