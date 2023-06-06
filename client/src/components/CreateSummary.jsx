@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Global } from "../helpers/Global";
+import { SaveSummary } from "./SaveSummary";
 
 export default function CreateSummary () {
   const [imput, setimput] = useState("");
@@ -10,7 +12,7 @@ export default function CreateSummary () {
     setResult("");
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/api/getsummary", {
+      const response = await fetch(`${Global.url}summary`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,6 +50,11 @@ export default function CreateSummary () {
       </form>
       <div className="result">{result}</div>
       <div className="result">{loading ? "Loading..." : ""}</div>
+      {
+        result && (
+          <SaveSummary summary={result}  />
+        )
+      }
     </>
   );
 }
