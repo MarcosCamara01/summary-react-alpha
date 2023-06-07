@@ -42,7 +42,7 @@ export default function CreateSummary () {
   }
 
   return (
-    <>
+    <section>
       <h3>Summary</h3>
       <form onSubmit={onSubmit}>
         <input
@@ -62,6 +62,6 @@ export default function CreateSummary () {
           <SaveSummary summaryData={summary} titleData={title}  />
         )
       }
-    </>
+    </section>
   );
 }
