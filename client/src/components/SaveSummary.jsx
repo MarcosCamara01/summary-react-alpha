@@ -2,20 +2,22 @@ import React, { useState } from 'react';
 import { Global } from '../helpers/Global';
 import { Loader } from '../helpers/Loader';
 
-export const SaveSummary = ({ summary }) => {
+export const SaveSummary = ({ summaryData }) => {
     const [loading, setLoading] = useState(false);
     const [save, setSave] = useState("Save Summary");
 
     const saveSummary = async () => {
-        console.log(summary);
-
+        console.log(summaryData)
         try {
-            const response = await fetch(Global.url + "crear", {
+            const response = await fetch(Global.url + "create", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(summary),
+                body: JSON.stringify({
+                    title: 'Título del resumen',
+                    content: summaryData,
+                }),
             });
 
             console.log(response);

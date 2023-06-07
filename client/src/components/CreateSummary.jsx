@@ -52,7 +52,7 @@ export default function CreateSummary () {
       <div className="result">{loading ? "Loading..." : ""}</div>
       {
         result && (
-          <SaveSummary summary={result}  />
+          <SaveSummary summaryData={result}  />
         )
       }
     </>

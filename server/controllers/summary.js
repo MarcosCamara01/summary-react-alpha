@@ -1,84 +1,106 @@
-const Summary = require("../models/Summary");
+const Summary = require("../models/summary");
 
-const create = (req, res) => {
+const create = async (req, res) => {
     let parameters = req.body;
 
-    const article = new Summary(parameters);
-
-    article.save((error, savedArticle) => {
-        if (error || !savedArticle) {
-            return res.status(400).json({
-                status: "error",
-                message: "Article has not been saved"
-            });
-        }
+    try {
+        const summary = new Summary(parameters);
+        const savedSummary = await summary.save();
 
         return res.status(200).json({
             status: "success",
-            article: savedArticle,
-            message: "Article successfully saved"
+            summary: savedSummary,
+            message: "Summary successfully saved"
         });
-    });
+    } catch (error) {
+        return res.status(400).json({
+            status: "error",
+            message: "Summary has not been saved"
+        });
+    }
 }
 
-const list = (req, res) => {
+const list = async (req, res) => {
     let query = Summary.find({});
 
     if (req.params.ultimos) {
         query.limit(3);
     }
 
-    query.sort({ fecha: -1 }).exec((error, articles) => {
-        if (error || !articles) {
+    try {
+        const articles = await query.sort({ date: -1 }).exec();
+
+        if (!articles || articles.length === 0) {
             return res.status(404).json({
                 status: "error",
                 message: "No articles found"
             });
         }
 
-        return res.status(200).send({
+        return res.status(200).json({
             status: "success",
             count: articles.length,
             articles
         });
-    });
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            message: "Error when retrieving articles"
+        });
+    }
 }
 
-const deleteOne = (req, res) => {
-    let articleId = req.params.id;
 
-    Summary.findOneAndDelete({ _id: articleId }, (error, deletedArticle) => {
-        if (error || !deletedArticle) {
-            return res.status(500).json({
+const deleteOne = async (req, res) => {
+    let summaryId = req.params.id;
+
+    try {
+        const deletedSummary = await Summary.findOneAndDelete({ _id: summaryId });
+
+        if (!deletedSummary) {
+            return res.status(404).json({
                 status: "error",
-                message: "Error when deleting"
+                message: "Summary not found"
             });
         }
 
         return res.status(200).json({
             status: "success",
-            article: deletedArticle,
-            message: "Delete method"
+            summary: deletedSummary,
+            message: "Summary deleted successfully"
         });
-    });
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            message: "Error when deleting summary"
+        });
+    }
 }
 
-const edit = (req, res) => {
-    let articleId = req.params.id;
+const edit = async (req, res) => {
+    let summaryId = req.params.id;
 
-    Summary.findOneAndUpdate({ _id: articleId }, req.body, { new: true }, (error, updatedArticle) => {
-        if (error || !updatedArticle) {
-            return res.status(500).json({
+    try {
+        const updatedSummary = await Summary.findOneAndUpdate({ _id: summaryId }, req.body, { new: true });
+
+        if (!updatedSummary) {
+            return res.status(404).json({
                 status: "error",
-                message: "Error updating"
+                message: "Summary not found"
             });
         }
 
         return res.status(200).json({
             status: "success",
-            article: updatedArticle
+            summary: updatedSummary,
+            message: "Summary updated successfully"
         });
-    });
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            message: "Error when updating summary"
+        });
+    }
 }
 
 module.exports = {
