@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { Global } from "../helpers/Global";
 import { SaveSummary } from "./SaveSummary";
+import { Loader } from "../helpers/Loader";
 
 export default function CreateSummary () {
   const [imput, setimput] = useState("");
-  const [result, setResult] = useState();
+  const [title, setTitle] = useState();
+  const [summary, setSummary] = useState();
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(event) {
     setLoading(true);
-    setResult("");
+    setSummary("");
+    setTitle("");
     event.preventDefault();
     try {
       const response = await fetch(`${Global.url}summary`, {
@@ -25,7 +28,10 @@ export default function CreateSummary () {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
 
-      setResult(data.result);
+      console.log(data)
+
+      setSummary(data.summary);
+      setTitle(data.title)
       setimput("");
       setLoading(false);
     } catch (error) {
@@ -48,11 +54,12 @@ export default function CreateSummary () {
         />
         <input type="submit" value="Generate a summary" />
       </form>
-      <div className="result">{result}</div>
-      <div className="result">{loading ? "Loading..." : ""}</div>
+      <div className="result">{title}</div>
+      <div className="result">{summary}</div>
+      <div className="result">{loading ? <Loader /> : ""}</div>
       {
-        result && (
-          <SaveSummary summaryData={result}  />
+        summary && (
+          <SaveSummary summaryData={summary} titleData={title}  />
         )
       }
     </>
