@@ -28,24 +28,24 @@ const list = async (req, res) => {
     }
 
     try {
-        const articles = await query.sort({ date: -1 }).exec();
+        const summaries = await query.sort({ date: -1 }).exec();
 
-        if (!articles || articles.length === 0) {
+        if (!summaries || summaries.length === 0) {
             return res.status(404).json({
                 status: "error",
-                message: "No articles found"
+                message: "No summaries found"
             });
         }
 
         return res.status(200).json({
             status: "success",
-            count: articles.length,
-            articles
+            count: summaries.length,
+            summaries
         });
     } catch (error) {
         return res.status(500).json({
             status: "error",
-            message: "Error when retrieving articles"
+            message: "Error when retrieving summaries"
         });
     }
 }

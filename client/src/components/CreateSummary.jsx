@@ -52,12 +52,12 @@ export default function CreateSummary () {
           value={imput}
           onChange={(e) => setimput(e.target.value)}
         />
-        <input type="submit" value="Generate a summary" />
+        <button type="button" onClick={onSubmit} disabled={loading} className="button-submit">
+          {loading ? <Loader size={30} color="#fff" /> : "Generate a Summary"}
+        </button>
       </form>
       <div className="result">{title}</div>
-      <div className="result">{summary}</div>
-      <div className="result">{loading ? <Loader /> : ""}</div>
-      {
+      <div className="result">{summary}</div>      {
         summary && (
           <SaveSummary summaryData={summary} titleData={title}  />
         )

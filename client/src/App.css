@@ -29,7 +29,8 @@
 }
 
 .main,
-.main input {
+.main input,
+.main .button-submit {
   font-size: 16px;
   line-height: 24px;
   color: #353740;
@@ -78,7 +79,7 @@
   opacity: 1;
 }
 
-.main input[type="submit"] {
+.main .button-submit {
   padding: 12px 0;
   color: #fff;
   background-color: #10a37f;
@@ -86,6 +87,9 @@
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .result {
@@ -95,10 +99,40 @@
 
 .nav-container {
   width: 260px;
-  height: 100vh;
+  height: calc(100vh - 16px);
   padding: 0.5rem;
 }
 
 .nav-container nav {
   width: 260px;
+
+}
+
+.nav-container nav ul {
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.nav-container nav ul li {
+  list-style: none;
+  position: relative;
+  height: auto;
+  opacity: 1;
+}
+
+.nav-container nav ul li a {
+  color: #000;
+  font-weight: 600;
+  padding: 12px;
+  word-break: break-all;
+  display: flex;
+  text-decoration: none;
+}
+
+.nav-container nav .summary-title {
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-height: 1.25rem;
 }
