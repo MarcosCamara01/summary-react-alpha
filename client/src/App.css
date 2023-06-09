@@ -52,14 +52,6 @@
   z-index: 100;
 }
 
-.main h3 {
-  font-size: 32px;
-  line-height: 40px;
-  font-weight: bold;
-  color: #202123;
-  margin: 16px 0 40px;
-}
-
 .main form {
   display: flex;
   flex-direction: column;
@@ -105,7 +97,13 @@
 
 .nav-container nav {
   width: 260px;
+  height: calc(100vh - 136px);
+}
 
+.nav-container nav h3 {
+  font-size: 12px;
+  padding: 12px 12px 8px;
+  margin: 0;
 }
 
 .nav-container nav ul {
@@ -123,11 +121,11 @@
 
 .nav-container nav ul li a {
   color: #000;
-  font-weight: 600;
   padding: 12px;
   word-break: break-all;
   display: flex;
   text-decoration: none;
+  font-size: 14px;
 }
 
 .nav-container nav .summary-title {
@@ -135,4 +133,60 @@
   text-overflow: ellipsis;
   overflow: hidden;
   max-height: 1.25rem;
+}
+
+.sidebar_top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.top-component {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: .375rem;
+}
+
+.bottom-component {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: .375rem;
+}
+
+.left-bottom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-link {
+  flex-grow: 1;
+  gap: 12px;
+  text-decoration: none;
+  line-height: 1.25rem;
+  font-size: .875rem;
+  color: #000;
+}
+
+.sidebar-link img {
+  width: 16px;
+}
+
+.sidebar-link span {
+  height: 18px;
+}
+
+.sidebar_top button {
+  background-color: transparent;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.sidebar_top button img {
+  width: 16px;
 }
