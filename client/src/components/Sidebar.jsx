@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Global } from '../helpers/Global';
 import add from "../assets/add.svg";
 import sidebar from "../assets/sidebar.svg";
 import user from "../assets/user.svg";
 import premium from "../assets/premium.svg";
 import settings from "../assets/settings.svg";
+import { getSummaries } from '../helpers/GetSummaries';
 
 export const Sidebar = () => {
 
@@ -12,35 +12,16 @@ export const Sidebar = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        getSummaries();
+        fetchSummaries();
     }, []);
 
-    const getSummaries = async () => {
+    const fetchSummaries = async () => {
         setLoading(true);
-        try {
-            const response = await fetch(Global.url + "summaries", {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
+        const summaries = await getSummaries();
 
-            const data = await response.json();
-
-            console.log(data)
-
-            if (data.status !== "success") {
-                console.error(data.error);
-                alert("Summaries could not be obtained");
-            }
-            setLoading(false);
-            setSummaries(data.summaries)
-        } catch (error) {
-            console.error(error);
-            alert("Summaries could not be obtained");
-            setLoading(false);
-        }
-    }
+        setSummaries(summaries);
+        setLoading(false);
+    };
 
     return (
         <div className='nav-container'>
