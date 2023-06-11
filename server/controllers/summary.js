@@ -103,9 +103,36 @@ const edit = async (req, res) => {
     }
 }
 
+const selectSummary = async (req, res) => {
+    const summaryId = req.params.id;
+
+    try {
+        const summary = await Summary.findById(summaryId);
+
+        if (!summary) {
+            return res.status(404).json({
+                status: "error",
+                message: "Summary not found"
+            });
+        }
+
+        return res.status(200).json({
+            status: "success",
+            summary
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            message: "Error when retrieving summary"
+        });
+    }
+}
+
+
 module.exports = {
     create,
     list,
     deleteOne,
-    edit
+    edit,
+    selectSummary
 }
