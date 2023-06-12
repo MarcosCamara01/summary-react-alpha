@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },
-  "author": "Marcos Camara",
+  "author": "Marcos Cámara",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "bcrypt-nodejs": "^0.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.1.4",

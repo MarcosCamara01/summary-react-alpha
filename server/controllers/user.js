@@ -4,19 +4,9 @@ const fs = require("fs");
 const path = require("path");
 
 const User = require("../models/user");
-const Follow = require("../models/follow");
-const Publication = require("../models/publication");
 
 const jwt = require("../services/jwt");
-const followService = require("../services/followService");
 const validate = require("../helpers/validate");
-
-const pruebaUser = (req, res) => {
-    return res.status(200).send({
-        message: "Mensaje enviado desde: controllers/user.js",
-        usuario: req.user
-    });
-}
 
 const register = (req, res) => {
     let params = req.body;
@@ -114,67 +104,6 @@ const login = (req, res) => {
         });
 }
 
-const profile = (req, res) => {
-    const id = req.params.id;
-
-
-    User.findById(id)
-        .select({ password: 0, role: 0 })
-        .exec(async (error, userProfile) => {
-            if (error || !userProfile) {
-                return res.status(404).send({
-                    status: "error",
-                    message: "El usuario no existe o hay un error"
-                });
-            }
-
-            const followInfo = await followService.followThisUser(req.user.id, id);
-
-            return res.status(200).send({
-                status: "success",
-                user: userProfile,
-                following: followInfo.following,
-                follower: followInfo.follower
-            });
-
-        });
-
-}
-
-const list = (req, res) => {
-    let page = 1;
-    if (req.params.page) {
-        page = req.params.page;
-    }
-    page = parseInt(page);
-
-    let itemsPerPage = 15;
-
-    User.find().select("-password -email -role -__v").sort('_id').paginate(page, itemsPerPage, async (error, users, total) => {
-
-        if (error || !users) {
-            return res.status(404).send({
-                status: "error",
-                message: "No hay usuarios disponibles",
-                error
-            });
-        }
-
-        let followUserIds = await followService.followUserIds(req.user.id);
-
-        return res.status(200).send({
-            status: "success",
-            users,
-            page,
-            itemsPerPage,
-            total,
-            pages: Math.ceil(total / itemsPerPage),
-            user_following: followUserIds.following,
-            user_follow_me: followUserIds.followers
-        });
-    });
-
-}
 
 const update = (req, res) => {
     let userIdentity = req.user;
@@ -298,44 +227,10 @@ const avatar = (req, res) => {
 
 }
 
-const counters = async (req, res) => {
-
-    let userId = req.user.id;
-
-    if (req.params.id) {
-        userId = req.params.id;
-    }
-
-    try {
-        const following = await Follow.count({ "user": userId });
-
-        const followed = await Follow.count({ "followed": userId });
-
-        const publications = await Publication.count({ "user": userId });
-
-        return res.status(200).send({
-            userId,
-            following: following,
-            followed: followed,
-            publications: publications
-        });
-    } catch (error) {
-        return res.status(500).send({
-            status: "error",
-            message: "Error en los contadores",
-            error
-        });
-    }
-}
-
 module.exports = {
-    pruebaUser,
     register,
     login,
-    profile,
-    list,
     update,
     upload,
     avatar,
-    counters
 }
