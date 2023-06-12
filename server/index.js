@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 const SummariesRoutes = require("./routes/summary");
 const UserRoutes = require("./routes/user");
 
-app.use("/api/summaries", cors(), SummariesRoutes);
+app.use("/api/content", cors(), SummariesRoutes);
 app.use("/api/user", cors(), UserRoutes);
 
 app.listen(port, () => {

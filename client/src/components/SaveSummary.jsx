@@ -10,7 +10,7 @@ export const SaveSummary = ({ summaryData, titleData }) => {
         console.log(summaryData)
         setLoading(true);
         try {
-            const response = await fetch(Global.url + "create", {
+            const response = await fetch(Global.url + "content/create", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

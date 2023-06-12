@@ -1,11 +1,15 @@
 import { Global } from './Global';
 
 export const getSummaries = async () => {
+
+  const token = localStorage.getItem("token");
+
   try {
-    const response = await fetch(Global.url + "summaries", {
+    const response = await fetch(Global.url + "content/summaries", {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        "Authorization": token
       }
     });
 

@@ -15,7 +15,7 @@ export default function CreateSummary () {
     setTitle("");
     event.preventDefault();
     try {
-      const response = await fetch(`${Global.url}summary`, {
+      const response = await fetch(`${Global.url}content/summary`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
