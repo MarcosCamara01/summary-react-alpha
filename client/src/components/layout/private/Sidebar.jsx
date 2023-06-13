@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import add from "../assets/add.svg";
-import sidebar from "../assets/sidebar.svg";
-import user from "../assets/user.svg";
-import premium from "../assets/premium.svg";
-import settings from "../assets/settings.svg";
+import add from "../../../assets/add.svg";
+import sidebar from "../../../assets/sidebar.svg";
+import user from "../../../assets/user.svg";
+import premium from "../../../assets/premium.svg";
+import settings from "../../../assets/settings.svg";
 import { getSummaries } from '../../../helpers/GetSummaries';
 
 export const Sidebar = () => {

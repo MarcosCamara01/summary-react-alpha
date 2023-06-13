@@ -9,9 +9,6 @@ const validate = (params) => {
         validator.isLength(params.surname, { min: 3, max: undefined }) &&
         validator.isAlpha(params.surname, "es-ES");
 
-    let nick = !validator.isEmpty(params.nick) &&
-        validator.isLength(params.nick, { min: 2, max: undefined });
-
     let email = !validator.isEmpty(params.email) &&
         validator.isEmail(params.email);
 
@@ -28,7 +25,7 @@ const validate = (params) => {
     }
    
 
-    if (!name || !surname || !nick || !email || !password) {
+    if (!name || !surname || !email || !password) {
         throw new Error("No se ha superado la validación");
     } else {
         console.log("validacion superada");
