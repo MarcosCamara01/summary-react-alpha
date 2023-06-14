@@ -1,3 +1,13 @@
+const bcrypt = require("bcrypt");
+const mongoosePagination = require("mongoose-pagination");
+const fs = require("fs");
+const path = require("path");
+
+const User = require("../models/user");
+
+const jwt = require("../services/jwt");
+const validate = require("../helpers/validate");
+
 const register = async (req, res) => {
     let params = req.body;
 
@@ -106,6 +116,31 @@ const login = (req, res) => {
                 message: "Error en la consulta de usuarios",
             });
         });
+};
+
+const profile = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const userProfile = await User.findById(id).select({ password: 0, role: 0 }).exec();
+
+        if (!userProfile) {
+            return res.status(404).send({
+                status: "error",
+                message: "El usuario no existe o hay un error"
+            });
+        }
+
+        return res.status(200).send({
+            status: "success",
+            user: userProfile,
+        });
+    } catch (error) {
+        return res.status(500).send({
+            status: "error",
+            message: "Error en la consulta de usuarios",
+        });
+    }
 };
 
 const update = async (req, res) => {
@@ -240,6 +275,7 @@ const avatar = (req, res) => {
 module.exports = {
     register,
     login,
+    profile,
     update,
     upload,
     avatar,

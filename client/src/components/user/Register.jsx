@@ -23,11 +23,14 @@ export const Register = () => {
 
             const data = await request.json();
 
+            console.log(data)
+
             if (data.status === "success") {
                 setSaved("saved");
             } else {
                 setSaved("error");
             }
+
         } catch (error) {
             setSaved("error");
             console.log("Error:", error);
@@ -35,39 +38,38 @@ export const Register = () => {
     };
 
     return (
-        <>
-            <div className="content__form">
 
-                <form className='config-form' onSubmit={saveUser}>
+        <div className="content__form">
 
-                    <h3 className='login-register_h3'>Register</h3>
+            <form className='config-form' onSubmit={saveUser}>
 
-                    <strong className='alert alert-success'>{saved == "saved" ? "User successfully registered" : ""}</strong>
-                    <strong className='alert alert-error'>{saved == "error" ? "The user has not registered" : ""}</strong>
+                <h3 className='login-register_h3'>Register</h3>
 
-                    <div className="form-group">
-                        <label htmlFor="name">Name</label>
-                        <input type="text" name='name' onChange={changed} autoComplete='no' />
-                    </div>
+                <strong className='alert alert-success'>{saved == "saved" ? "User successfully registered" : ""}</strong>
+                <strong className='alert alert-error'>{saved == "error" ? "The user has not registered" : ""}</strong>
 
-                    <div className="form-group">
-                        <label htmlFor="surname">Surname</label>
-                        <input type="text" name='surname' onChange={changed} autoComplete='no' />
-                    </div>
+                <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <input type="text" name='name' onChange={changed} autoComplete='no' />
+                </div>
 
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" name='email' onChange={changed} autoComplete='off' />
-                    </div>
+                <div className="form-group">
+                    <label htmlFor="surname">Surname</label>
+                    <input type="text" name='surname' onChange={changed} autoComplete='no' />
+                </div>
 
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" name='password' onChange={changed} />
-                    </div>
+                <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" name='email' onChange={changed} autoComplete='off' />
+                </div>
 
-                    <input type="submit" value="Register" className='post__button--white' />
-                </form>
-            </div>
-        </>
+                <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name='password' onChange={changed} />
+                </div>
+
+                <input type="submit" value="Register" className='post__button--white' />
+            </form>
+        </div>
     )
 }

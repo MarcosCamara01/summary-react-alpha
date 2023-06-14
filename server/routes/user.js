@@ -17,6 +17,7 @@ const uploads = multer({ storage });
 
 router.post("/register", UserContoller.register);
 router.post("/login", UserContoller.login);
+router.get("/profile/:id", check.auth, UserContoller.profile);
 router.put("/update", check.auth, UserContoller.update);
 router.post("/upload", [check.auth, uploads.single("file0")], UserContoller.upload);
 router.get("/avatar/:file", UserContoller.avatar);
