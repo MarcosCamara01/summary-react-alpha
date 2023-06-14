@@ -18,7 +18,7 @@ export const Routing = () => {
             <Route path='register' element={<Register />} />
           </Route>
 
-          <Route path='/social' element={<Private />}>
+          <Route path='/content' element={<Private />}>
             <Route index element={<CreateSummary />} />
           </Route>
         </Routes>

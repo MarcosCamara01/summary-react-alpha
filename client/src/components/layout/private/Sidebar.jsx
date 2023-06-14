@@ -5,11 +5,13 @@ import user from "../../../assets/user.svg";
 import premium from "../../../assets/premium.svg";
 import settings from "../../../assets/settings.svg";
 import { getSummaries } from '../../../helpers/GetSummaries';
+import { useAuth } from '../../../hooks/useAuth';
 
 export const Sidebar = () => {
 
     const [summaries, setSummaries] = useState([]);
     const [loading, setLoading] = useState(false);
+    const { auth } = useAuth();
 
     useEffect(() => {
         fetchSummaries();
@@ -57,7 +59,7 @@ export const Sidebar = () => {
                 <a href="#" className='sidebar-link bottom-component'>
                     <div className="left-bottom">
                         <img src={user} alt="add" />
-                        <span>Name Name</span>
+                        <span>{auth.name + " " + auth.surname}</span>
                     </div>
                     <img src={settings} alt="settings" />
                 </a>

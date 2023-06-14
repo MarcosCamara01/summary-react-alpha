@@ -3,7 +3,7 @@ import { Global } from "../helpers/Global";
 import { SaveSummary } from "./SaveSummary";
 import { Loader } from "../helpers/Loader";
 
-export default function CreateSummary () {
+export default function CreateSummary() {
   const [imput, setimput] = useState("");
   const [title, setTitle] = useState();
   const [summary, setSummary] = useState();
@@ -27,8 +27,6 @@ export default function CreateSummary () {
       if (response.status !== 200) {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
-
-      console.log(data)
 
       setSummary(data.summary);
       setTitle(data.title)
@@ -57,9 +55,10 @@ export default function CreateSummary () {
         </button>
       </form>
       <div className="result">{title}</div>
-      <div className="result">{summary}</div>      {
+      <div className="result">{summary}</div>
+      {
         summary && (
-          <SaveSummary summaryData={summary} titleData={title}  />
+          <SaveSummary summaryData={summary} titleData={title} />
         )
       }
     </section>

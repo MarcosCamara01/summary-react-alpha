@@ -1,11 +1,17 @@
 const { Schema, model } = require("mongoose");
 
 const SummarySchema = new Schema({
+    user: {
+        type: Schema.ObjectId,
+        ref: "User"
+    },
     title: {
-        type: String
+        type: String,
+        required: true
     },
     content: {
-        type: String
+        type: String,
+        required: true
     },
     date: {
         type: Date,

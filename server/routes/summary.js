@@ -7,7 +7,7 @@ const check = require("../middlewares/auth");
 
 router.post("/summary", openaiHandler);
 router.post("/create", check.auth, SummaryController.create);
-router.get("/summaries/:last?", check.auth, SummaryController.list);
+router.get("/summaries/:id", check.auth, SummaryController.list);
 router.get("/summary/:id", check.auth, SummaryController.selectSummary);
 router.delete("/summary/:id", check.auth, SummaryController.deleteOne);
 router.put("/summary/:id", check.auth, SummaryController.edit);

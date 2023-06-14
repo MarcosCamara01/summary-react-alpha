@@ -1,10 +1,11 @@
-const Summary = require("../models/summary");
+const Summary = require("../models/Summary");
 
 const create = async (req, res) => {
     let parameters = req.body;
 
     try {
-        const summary = new Summary(parameters);
+        let summary = new Summary(parameters);
+        summary.user = req.user.id;
         const savedSummary = await summary.save();
 
         return res.status(200).json({
@@ -21,35 +22,34 @@ const create = async (req, res) => {
 }
 
 const list = async (req, res) => {
-    let query = Summary.find({});
-
-    if (req.params.ultimos) {
-        query.limit(3);
-    }
-
     try {
-        const summaries = await query.sort({ date: -1 }).exec();
-
-        if (!summaries || summaries.length === 0) {
-            return res.status(404).json({
-                status: "error",
-                message: "No summaries found"
-            });
-        }
-
-        return res.status(200).json({
-            status: "success",
-            count: summaries.length,
-            summaries
+      const userId = req.params.id;
+  
+      const summaries = await Summary.find({ user: userId })
+        .sort("-created_at")
+        .populate("user", "-password -__v -role -email")
+        
+  
+      if (!summaries || summaries.length <= 0) {
+        return res.status(404).send({
+          status: "error",
+          message: "No hay resúmenes para mostrar",
         });
+      }
+  
+      return res.status(200).send({
+        status: "success",
+        message: "Resúmenes del perfil de un usuario",
+        total: summaries.totalDocs,
+        summaries,
+      });
     } catch (error) {
-        return res.status(500).json({
-            status: "error",
-            message: "Error when retrieving summaries"
-        });
+      return res.status(500).send({
+        status: "error",
+        message: "Error en el servidor",
+      });
     }
-}
-
+  };
 
 const deleteOne = async (req, res) => {
     let summaryId = req.params.id;

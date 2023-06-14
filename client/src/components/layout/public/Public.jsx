@@ -13,7 +13,7 @@ export const Public = () => {
 
       <section className='layout__content'>
         {
-          !auth._id ? <Outlet /> : <Navigate to="/social" />
+          !auth._id ? <Outlet /> : <Navigate to="/content" />
         }
       </section>
     </>

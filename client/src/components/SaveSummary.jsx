@@ -7,13 +7,15 @@ export const SaveSummary = ({ summaryData, titleData }) => {
     const [save, setSave] = useState("Save Summary");
 
     const saveSummary = async () => {
-        console.log(summaryData)
         setLoading(true);
         try {
+            const token = localStorage.getItem("token");
             const response = await fetch(Global.url + "content/create", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Authorization": token
+
                 },
                 body: JSON.stringify({
                     title: titleData,

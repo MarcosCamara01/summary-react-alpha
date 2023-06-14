@@ -3,9 +3,13 @@ import { Global } from './Global';
 export const getSummaries = async () => {
 
   const token = localStorage.getItem("token");
+  const user = localStorage.getItem("user");
 
   try {
-    const response = await fetch(Global.url + "content/summaries", {
+    const userObj = JSON.parse(user);
+    const userId = userObj.id;
+
+    const response = await fetch(Global.url + "content/summaries/" + userId, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
