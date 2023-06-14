@@ -23,33 +23,32 @@ const create = async (req, res) => {
 
 const list = async (req, res) => {
     try {
-      const userId = req.params.id;
-  
-      const summaries = await Summary.find({ user: userId })
-        .sort("-created_at")
-        .populate("user", "-password -__v -role -email")
-        
-  
-      if (!summaries || summaries.length <= 0) {
-        return res.status(404).send({
-          status: "error",
-          message: "No hay resúmenes para mostrar",
+        const userId = req.params.id;
+
+        const summaries = await Summary.find({ user: userId })
+            .sort({ date: -1 })
+            .populate("user", "-password -__v -role -email");
+
+        if (!summaries || summaries.length <= 0) {
+            return res.status(404).send({
+                status: "error",
+                message: "No hay resúmenes para mostrar",
+            });
+        }
+
+        return res.status(200).send({
+            status: "success",
+            message: "Resúmenes del perfil de un usuario",
+            total: summaries,
+            summaries,
         });
-      }
-  
-      return res.status(200).send({
-        status: "success",
-        message: "Resúmenes del perfil de un usuario",
-        total: summaries.totalDocs,
-        summaries,
-      });
     } catch (error) {
-      return res.status(500).send({
-        status: "error",
-        message: "Error en el servidor",
-      });
+        return res.status(500).send({
+            status: "error",
+            message: "Error en el servidor",
+        });
     }
-  };
+};
 
 const deleteOne = async (req, res) => {
     let summaryId = req.params.id;
