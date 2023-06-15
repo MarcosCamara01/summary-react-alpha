@@ -32,20 +32,18 @@ const list = async (req, res) => {
         if (!summaries || summaries.length <= 0) {
             return res.status(404).send({
                 status: "error",
-                message: "No hay resúmenes para mostrar",
+                message: "No summaries to show",
             });
         }
 
         return res.status(200).send({
             status: "success",
-            message: "Resúmenes del perfil de un usuario",
-            total: summaries,
             summaries,
         });
     } catch (error) {
         return res.status(500).send({
             status: "error",
-            message: "Error en el servidor",
+            message: "Server error",
         });
     }
 };

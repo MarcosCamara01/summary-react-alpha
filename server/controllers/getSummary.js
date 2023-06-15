@@ -64,7 +64,7 @@ function generatePrompt(text) {
 }
 
 function generateTitle(summary) {
-  const maxTitleLength = 10;
+  const maxTitleLength = 5;
   const words = summary.split(' ');
   let title = words.slice(0, maxTitleLength).join(' ');
 

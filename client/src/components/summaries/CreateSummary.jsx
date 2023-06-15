@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Global } from "../helpers/Global";
+import { Global } from "../../helpers/Global";
 import { SaveSummary } from "./SaveSummary";
-import { Loader } from "../helpers/Loader";
+import { Loader } from "../../helpers/Loader";
 
 export default function CreateSummary() {
   const [imput, setimput] = useState("");

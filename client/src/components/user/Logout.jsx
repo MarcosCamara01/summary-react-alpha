@@ -5,7 +5,7 @@ import { Loader } from '../../helpers/Loader';
 
 export const Logout = () => {
 
-  const { setAuth, setCounters } = useAuth();
+  const { setAuth } = useAuth();
 
   const navigate = useNavigate();
 
@@ -13,7 +13,6 @@ export const Logout = () => {
     localStorage.clear();
 
     setAuth({});
-    setCounters({});
 
     navigate("/");
   });

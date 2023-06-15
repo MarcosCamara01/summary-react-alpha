@@ -2,7 +2,7 @@ import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { useAuth } from '../../../hooks/useAuth'
 import { Loader } from '../../../helpers/Loader'
-import { Sidebar } from './Sidebar'
+import { Header } from './Header'
 
 export const Private = () => {
 
@@ -13,13 +13,13 @@ export const Private = () => {
   } else {
     return (
       <>
-        <Sidebar />
+        <Header />
 
-        <section className='layout__content'>
+        <main>
           {
-            auth._id ? <Outlet /> : <Navigate to="/login" />
+            auth._id ? <Outlet /> : <Navigate to="/n/login" />
           }
-        </section>
+        </main>
       </>
     )
   }

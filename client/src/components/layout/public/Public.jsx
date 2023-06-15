@@ -11,11 +11,11 @@ export const Public = () => {
     <>
       <Header />
 
-      <section className='layout__content'>
+      <main>
         {
-          !auth._id ? <Outlet /> : <Navigate to="/content" />
+          !auth._id ? <Outlet /> : <Navigate to="/" />
         }
-      </section>
+      </main>
     </>
   )
 }

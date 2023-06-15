@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Global } from '../helpers/Global';
-import { Loader } from '../helpers/Loader';
+import { Global } from '../../helpers/Global';
+import { Loader } from '../../helpers/Loader';
 
 export const SaveSummary = ({ summaryData, titleData }) => {
     const [loading, setLoading] = useState(false);
