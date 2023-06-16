@@ -8,6 +8,7 @@ import { Login } from '../components/user/Login';
 import { Register } from '../components/user/Register';
 import { Dashboard } from '../components/summaries/Dashboard';
 import { Logout } from '../components/user/Logout';
+import { Summary } from '../components/summaries/Summary';
 
 export const Routing = () => {
   return (
@@ -23,6 +24,7 @@ export const Routing = () => {
           <Route path='/' element={<Private />}>
             <Route index element={<CreateSummary />} />
             <Route path='dashboard' element={<Dashboard />} />
+            <Route path='dashboard/:publicationId' element={<Summary />} />
             <Route path='logout' element={<Logout />} />
           </Route>
         </Routes>

@@ -1,15 +1,11 @@
 import { Global } from './Global';
 
-export const getSummaries = async () => {
+export const getSummaries = async (petition, id) => {
 
   const token = localStorage.getItem("token");
-  const user = localStorage.getItem("user");
 
   try {
-    const userObj = JSON.parse(user);
-    const userId = userObj.id;
-
-    const response = await fetch(Global.url + "content/summaries/" + userId, {
+    const response = await fetch(Global.url + `content/${petition}/` + id, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +22,8 @@ export const getSummaries = async () => {
       alert("Summaries could not be obtained");
     }
 
-    return data.summaries;
+    return data;
+    
   } catch (error) {
     console.error(error);
     alert("Summaries could not be obtained");
