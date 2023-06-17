@@ -40,27 +40,29 @@ export default function CreateSummary() {
   }
 
   return (
-    <section>
-      <h3>Summary</h3>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          name="text"
-          placeholder="Enter a text"
-          value={imput}
-          onChange={(e) => setimput(e.target.value)}
-        />
-        <button type="button" onClick={onSubmit} disabled={loading} className="button-submit">
-          {loading ? <Loader size={24} color="#fff" /> : "Generate a Summary"}
-        </button>
-      </form>
-      <div className="result">{title}</div>
-      <div className="result">{summary}</div>
-      {
-        summary && (
-          <SaveSummary summaryData={summary} titleData={title} />
-        )
-      }
+    <section className="create-section">
+      <div>
+        <h3>Summary</h3>
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            name="text"
+            placeholder="Enter a text"
+            value={imput}
+            onChange={(e) => setimput(e.target.value)}
+          />
+          <button type="button" onClick={onSubmit} disabled={loading} className="button-submit">
+            {loading ? <Loader size={24} color="#fff" /> : "Generate a Summary"}
+          </button>
+        </form>
+        <div className="result">{title}</div>
+        <div className="result">{summary}</div>
+        {
+          summary && (
+            <SaveSummary summaryData={summary} titleData={title} />
+          )
+        }
+      </div>
     </section>
   );
 }

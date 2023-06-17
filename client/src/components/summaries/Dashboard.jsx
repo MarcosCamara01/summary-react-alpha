@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getSummaries } from '../../helpers/GetSummaries';
 import { Link } from 'react-router-dom'
-import summarize from "../../assets/summarize.svg";
+import { MdOutlineSummarize } from 'react-icons/md';
 
 export const Dashboard = () => {
     const [summaries, setSummaries] = useState([]);
@@ -16,7 +16,7 @@ export const Dashboard = () => {
         setLoading(true);
         const userObj = JSON.parse(user);
         const userId = userObj.id;
-        
+
         const data = await getSummaries("summaries", userId);
 
         setSummaries(data.summaries);
@@ -45,7 +45,7 @@ export const Dashboard = () => {
                     <div className='card' key={summary._id}>
                         <Link to={summary._id}>
                             <div className='card_top'>
-                                <img src={summarize} alt="add" />
+                                <span><MdOutlineSummarize /></span>
                                 <h3>{summary.title}</h3>
                             </div>
                             <div className='card_content'>

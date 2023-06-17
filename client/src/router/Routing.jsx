@@ -24,7 +24,7 @@ export const Routing = () => {
           <Route path='/' element={<Private />}>
             <Route index element={<CreateSummary />} />
             <Route path='dashboard' element={<Dashboard />} />
-            <Route path='dashboard/:publicationId' element={<Summary />} />
+            <Route path='dashboard/:id' element={<Summary />} />
             <Route path='logout' element={<Logout />} />
           </Route>
         </Routes>

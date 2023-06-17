@@ -15,7 +15,7 @@ export const Summary = () => {
     const fetchSummary = async () => {
         setLoading(true);
         
-        const data = await getSummaries("summary", params.publicationId);
+        const data = await getSummaries("summary", params.id);
 
         setSummary(data.summary);
         setLoading(false);
