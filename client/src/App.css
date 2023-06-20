@@ -46,7 +46,6 @@ body {
   margin: 0px;
   box-sizing: border-box;
   font-size: 16px;
-  line-height: 24px;
   background-color: var(--background);
   color: var(--text-primary);
   font-family: "ColfaxAI", Helvetica, sans-serif;
@@ -75,13 +74,13 @@ section {
   justify-content: center;
 }
 
-main form {
+.create-section form {
   display: flex;
   flex-direction: column;
   width: 320px;
 }
 
-main input[type="text"] {
+.create-section input[type="text"] {
   padding: 12px 16px;
   border: 1px solid var(--pink-500);
   border-radius: 4px;
@@ -94,7 +93,7 @@ main ::placeholder {
   opacity: 1;
 }
 
-main .button-submit {
+.create-section .button-submit {
   padding: 12px 0;
   height: 48px;
   color: var(--text-primary);
@@ -174,4 +173,42 @@ header nav a {
 
 header nav a:not(:last-of-type) {
   margin-right: 32px;
+}
+
+/*Summary Page*/
+.summary h1 {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.summary h1 svg {
+  cursor: pointer;
+}
+
+.summary .buttons {
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.summary .buttons svg {
+  font-size: 20px;
+}
+
+.input-bx {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary input {
+  font-size: 24px;
+  color: var(--text-primary);
+  background-color: var(--background);
+  border: transparent;
+  outline: 0;
+  font-weight: 600;
 }
