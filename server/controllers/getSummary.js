@@ -42,7 +42,6 @@ async function openaiHandler(req, res) {
       summary: completion.data.choices[0].text
     });
   } catch (error) {
-    // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
       res.status(error.response.status).json(error.response.data);
@@ -60,7 +59,7 @@ async function openaiHandler(req, res) {
 function generatePrompt(text) {
   const textForSummary =
     text[0].toUpperCase() + text.slice(1).toLowerCase();
-  return `Summarize this text:${textForSummary}.`;
+  return `Summarize the following text in 500 words or less. Create sections for each important point with a brief summary:${textForSummary}.`;
 }
 
 function generateTitle(summary) {

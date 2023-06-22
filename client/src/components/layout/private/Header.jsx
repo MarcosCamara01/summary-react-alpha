@@ -55,7 +55,7 @@ export const Header = () => {
               </div>
             </Link>
             <div className='separator'></div>
-            <Link to={"#"}>
+            <Link to={"/logout"}>
               <div className='link-content link-red'>
                 <div><FiPower /></div>
                 Logout

@@ -194,6 +194,7 @@ main ::placeholder {
 
 .card_top {
   display: flex;
+  align-items: center;
   gap: 15px;
 }
 
