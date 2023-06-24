@@ -6,7 +6,7 @@ import { Header } from './Header'
 
 export const Private = () => {
 
-  const { auth, loading } = useAuth();
+  const { auth, user, loading } = useAuth();
 
   if (loading) {
     return <div className='loader__bx loader__bx--center'><Loader /></div>
@@ -17,7 +17,7 @@ export const Private = () => {
 
         <main>
           {
-            auth._id ? <Outlet /> : <Navigate to="/n/login" />
+            auth._id || user != null ? <Outlet /> : <Navigate to="/n/login" />
           }
         </main>
       </>

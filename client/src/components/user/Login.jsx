@@ -1,12 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from '../../hooks/useForm';
 import { Global } from '../../helpers/Global';
 import { useAuth } from '../../hooks/useAuth';
+import {useNavigate} from "react-router-dom";
 
 export const Login = () => {
   const { form, changed } = useForm({});
   const [logged, setLogged] = useState('not_logged');
-  const { setAuth } = useAuth();
+  const { setAuth, user, googleSignIn } = useAuth();
+  const navigate = useNavigate();
+
+  const loginGoogle = async () => {
+    try {
+      await googleSignIn();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    if (user != null) {
+      navigate("/")
+    }
+  }, [user])
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -62,6 +78,10 @@ export const Login = () => {
           </div>
 
           <input type="submit" value="Login" className='post__button--white' />
+
+          <button onClick={loginGoogle} className="btniniciar">
+            <span> Iniciar con Gmail</span>
+          </button>
         </form>
       </div>
     </>
