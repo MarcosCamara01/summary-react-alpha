@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
     const unsubscribe = onAuthStateChanged(authGoogle, (currentUser) => {
       setUser(currentUser);
-      console.log('User', currentUser)
+      console.log(currentUser)
     });
     return () => {
       unsubscribe();

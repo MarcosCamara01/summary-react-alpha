@@ -6,11 +6,11 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-async function openaiHandler(req, res) {
+async function generateSummary(req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
-        message: 'OpenAI API key not configured, please follow instructions in README.md',
+        message: 'OpenAI API key not configured',
       },
     });
     return;
@@ -26,20 +26,36 @@ async function openaiHandler(req, res) {
     return;
   }
 
+  const summaryType = req.body.type || 'normal';
+
   try {
+    let prompt;
+    if (summaryType === 'normal') {
+      prompt = generatePrompt(text);
+    } else if (summaryType === 'flashcard') {
+      prompt = promptFlashCard(text);
+    } else {
+      res.status(400).json({
+        error: {
+          message: 'Invalid summary type',
+        },
+      });
+      return;
+    }
+
     const completion = await openai.createCompletion({
       model: 'text-davinci-003',
-      prompt: generatePrompt(text),
+      prompt,
       temperature: 0,
       max_tokens: 1024,
       top_p: 1.0,
       frequency_penalty: 0.0,
       presence_penalty: 0.0,
     });
-    
+
     res.status(200).json({
       title: generateTitle(completion.data.choices[0].text),
-      summary: completion.data.choices[0].text
+      summary: completion.data.choices[0].text,
     });
   } catch (error) {
     if (error.response) {
@@ -62,6 +78,12 @@ function generatePrompt(text) {
   return `Summarize the following text in 500 words or less. Create sections for each important point with a brief summary:${textForSummary}.`;
 }
 
+function promptFlashCard(text) {
+  const textForSummary =
+    text[0].toUpperCase() + text.slice(1).toLowerCase();
+  return `Create a flash card for the following text:${textForSummary}.`;
+}
+
 function generateTitle(summary) {
   const maxTitleLength = 5;
   const words = summary.split(' ');
@@ -74,4 +96,4 @@ function generateTitle(summary) {
   return title;
 }
 
-module.exports = openaiHandler;
+module.exports = generateSummary;

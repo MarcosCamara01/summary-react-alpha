@@ -8,6 +8,7 @@ export default function CreateSummary() {
   const [title, setTitle] = useState();
   const [summary, setSummary] = useState();
   const [loading, setLoading] = useState(false);
+  const [summaryType, setSummaryType] = useState("normal"); // Estado para controlar el tipo de resumen
 
   async function onSubmit(event) {
     setLoading(true);
@@ -20,7 +21,7 @@ export default function CreateSummary() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text: imput }),
+        body: JSON.stringify({ text: imput, type: summaryType }), // Incluir el tipo de resumen en el cuerpo de la solicitud
       });
 
       const data = await response.json();
@@ -51,6 +52,10 @@ export default function CreateSummary() {
             value={imput}
             onChange={(e) => setimput(e.target.value)}
           />
+          <select value={summaryType} onChange={(e) => setSummaryType(e.target.value)}>
+            <option value="normal">Normal</option>
+            <option value="flashcard">Flash Card</option>
+          </select>
           <button type="button" onClick={onSubmit} disabled={loading} className="button-submit">
             {loading ? <Loader size={24} color="#fff" /> : "Generate a Summary"}
           </button>

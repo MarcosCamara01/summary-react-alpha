@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const SummaryController = require("../controllers/summary");
-const openaiHandler = require('../controllers/getSummary');
+const GetSummary = require('../controllers/getSummary');
 const check = require("../middlewares/auth");
 
-router.post("/summary", openaiHandler);
+router.post("/summary", GetSummary);
 router.post("/create", check.auth, SummaryController.create);
 router.get("/summaries/:id/:last?", check.auth, SummaryController.list);
 router.get("/summary/:id", check.auth, SummaryController.selectSummary);
