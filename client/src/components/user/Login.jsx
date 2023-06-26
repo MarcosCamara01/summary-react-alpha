@@ -8,7 +8,7 @@ import { FcGoogle } from 'react-icons/fc';
 export const Login = () => {
   const { form, changed } = useForm({});
   const [logged, setLogged] = useState('not_logged');
-  const { setAuth, user, googleSignIn } = useAuth();
+  const { setAuth, userGoogle, googleSignIn } = useAuth();
   const navigate = useNavigate();
 
   const loginGoogle = async () => {
@@ -20,10 +20,10 @@ export const Login = () => {
   }
 
   useEffect(() => {
-    if (user != null) {
+    if (userGoogle != null) {
       navigate("/")
     }
-  }, [user])
+  }, [userGoogle])
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -80,7 +80,7 @@ export const Login = () => {
 
           <input type="submit" value="Login" className='post__button--white' />
 
-          <button className="google-button">
+          <button className="google-button" onClick={loginGoogle}>
            <FcGoogle />
             Continue with Google
           </button>

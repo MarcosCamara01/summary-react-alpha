@@ -14,13 +14,13 @@ export const AuthProvider = ({ children }) => {
 
   const [auth, setAuth] = useState({});
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({});
+  const [userGoogle, setUserGoogle] = useState({});
 
   useEffect(() => {
     authUser();
 
     const unsubscribe = onAuthStateChanged(authGoogle, (currentUser) => {
-      setUser(currentUser);
+      setUserGoogle(currentUser);
       console.log(currentUser)
     });
     return () => {
@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
         loading,
         googleSignIn,
         logOut,
-        user
+        userGoogle
       }}
     >
       {children}

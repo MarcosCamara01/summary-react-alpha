@@ -8,7 +8,7 @@ export default function CreateSummary() {
   const [title, setTitle] = useState();
   const [summary, setSummary] = useState();
   const [loading, setLoading] = useState(false);
-  const [summaryType, setSummaryType] = useState("normal"); // Estado para controlar el tipo de resumen
+  const [summaryType, setSummaryType] = useState("normal");
 
   async function onSubmit(event) {
     setLoading(true);
@@ -21,7 +21,7 @@ export default function CreateSummary() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text: imput, type: summaryType }), // Incluir el tipo de resumen en el cuerpo de la solicitud
+        body: JSON.stringify({ text: imput, type: summaryType }),
       });
 
       const data = await response.json();

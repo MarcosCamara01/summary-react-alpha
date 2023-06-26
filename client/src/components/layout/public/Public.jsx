@@ -5,7 +5,7 @@ import { useAuth } from '../../../hooks/useAuth'
 
 export const Public = () => {
 
-  const { auth, user } = useAuth();
+  const { auth, userGoogle } = useAuth();
 
   return (
     <>
@@ -13,7 +13,7 @@ export const Public = () => {
 
       <main>
         {
-          !auth._id || user === null ? <Outlet /> : <Navigate to="/" />
+          !auth._id || userGoogle === null ? <Outlet /> : <Navigate to="/" />
         }
       </main>
     </>
